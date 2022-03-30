@@ -14,7 +14,6 @@ type ResponseData = {
 
 const Home = () => {
   const [characters, setCharacters] = useState<ResponseData[]>([]);
-  console.log(characters);
 
   const timesTemp = "1648471885";
   const hash = "4d793a892c023ce44a123382021f8125";
@@ -23,7 +22,7 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       const resp = await fetch(
-        `http://gateway.marvel.com/v1/public/characters?ts=${timesTemp}&apikey=${apiKey}&hash=${hash}`
+        `https://gateway.marvel.com/v1/public/characters?ts=${timesTemp}&apikey=${apiKey}&hash=${hash}`
       );
       const data = await resp.json();
       setCharacters(data.data.results);
@@ -35,7 +34,7 @@ const Home = () => {
   const handleClick = useCallback(async () => {
     const offset = characters.length
     const resp = await fetch(
-      `http://gateway.marvel.com/v1/public/characters?ts=${timesTemp}&apikey=${apiKey}&hash=${hash}&offset=${offset}`
+      `https://gateway.marvel.com/v1/public/characters?ts=${timesTemp}&apikey=${apiKey}&hash=${hash}&offset=${offset}`
     );
     const data = await resp.json();
     setCharacters([...characters, ...data.data.results]);
